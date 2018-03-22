@@ -55,6 +55,8 @@ public class Main extends StateBasedGame{
 		options.setOption("rooms.min_count", "3");
 		options.setOption("rooms.max_count", "5");
 		
+		options.setOption("seed", "-2761134060183846889");
+		
 		RandomDungeonBuilder builder = new RandomDungeonBuilder();
 		builder.configure(options);
 		builder.build();

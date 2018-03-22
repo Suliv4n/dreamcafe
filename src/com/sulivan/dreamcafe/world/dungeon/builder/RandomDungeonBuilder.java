@@ -104,19 +104,22 @@ public class RandomDungeonBuilder extends DungeonBuilder{
 			
 			int width = RandomUtil.randInt(random, minimumRoomsWidth, maximumRoomsWidth);
 			int height = RandomUtil.randInt(random, minimumRoomsHeight, maximumRoomsHeight);
+
 			
 			previousRoomWidth = width;
 			previousRoomHeight = height;
 			
 			previousRoomX = x;
-			previousRoomY = Math.max(y, 0);			
+			previousRoomY = Math.max(y, 0);	
 			
+			
+			System.out.println("width: " + width + "height: " + height);
 			
 			map.fill(x, y, width, height, 'R');
+			map.border(x-1, y-1, width+1, height+1);
 		}
 		
 		map.debug();
-		System.out.println("Width: " + map.getWidth() + " ; height: " + map.getHeight());
 
 		return map;
 	}

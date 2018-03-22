@@ -38,7 +38,7 @@ public class DungeonMap {
 		
 		if(y<0){
 			for(int i=0; i<-y-1; i++) {
-				preprendLine();
+				prependLine();
 			}
 			
 			y=0;
@@ -55,6 +55,7 @@ public class DungeonMap {
 	}
 	
 	public void setTile(int x, int y, char tile) {
+		
 		map.set(y, map.get(y).substring(0, x) + tile + map.get(y).substring(x+1));
 	}
 	
@@ -85,8 +86,14 @@ public class DungeonMap {
 		map.add(new String(new char[getWidth()]).replace("\0", " "));
 	}
 	
-	public void preprendLine() {
+	public void prependLine() {
 		map.add(0, new String(new char[getWidth()]).replace("\0", " "));
+	}
+	
+	public void prependColumn() {
+		for(int i=0; i<map.size(); i++) {
+			map.set(i, " " + map.get(i));
+		}
 	}
 
 	public void debug() {
@@ -115,6 +122,47 @@ public class DungeonMap {
 		System.out.print("+");
 		
 		System.out.println();
+	}
+
+
+	public void border(int x, int y, int width, int height) {
+
+		System.out.println(x);
+		if(y<0){
+			for(int i=0; i<-y; i++) {
+				prependLine();
+			}
+			
+			y=0;
+		}
+		
+		if(x<0){
+			for(int i=0; i<-x; i++) {
+				prependColumn();
+			}
+			
+			x=0;
+		}
+		
+		setMinWidth(x + width + 1);
+		setMinHeight(y + height + 1);
+
+		
+		setTile(x, y, '7');
+		setTile(x + width, y, '9');
+		setTile(x, y + height, '1');
+		setTile(x + width, y + height, '3');
+
+		for(int i=1; i<width; i++){
+			setTile(x + i, y, '8');
+			setTile(x + i, y + height, '2');
+		}
+		
+		for(int i=1; i<height; i++){
+			setTile(x, y + i, '4');
+			setTile(x + width, y + i, '6');
+		}
+
 	}
 
 }
